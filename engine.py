@@ -6,9 +6,9 @@ import math
 gameMap = [
         [1, 1, 1, 1, 1],
         [0, 0, 0, 0, 0],
-        [1, 0, 0, 1, 0],
         [0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1]
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
         ]
 
 
@@ -26,7 +26,7 @@ def main():
 
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((250, 250, 250))
+    background.fill((0, 0, 0))
     
     
     # Event loop
@@ -34,8 +34,25 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 return
-
-
+        if angleOfPlayer < 0:
+            angleOfPlayer += (math.pi * 2)
+        
+        if event.type == KEYDOWN:
+            if event.key == K_LEFT:
+                angleOfPlayer += (math.pi / 64)
+            elif event.key == K_RIGHT:
+                angleOfPlayer = angleOfPlayer - (math.pi / 64)
+            elif event.key == K_UP:
+                startY += 0.01 * math.sin(angleOfPlayer) * -1
+                startX += 0.01 * math.cos(angleOfPlayer) * -1
+            elif event.key == K_DOWN:
+                startY += 0.01 * math.sin(angleOfPlayer) 
+                startX += 0.01 * math.cos(angleOfPlayer)
+                
+        if angleOfPlayer < 0:
+            angleOfPlayer += (math.pi * 2)
+       
+        screen.fill((0, 0, 0))
         for x in range(0, 16):
             angleOfRay = angleOfPlayer - ((math.pi / 2) + (x / 16) * math.pi)
             directionVectorX = math.cos(angleOfRay)
@@ -46,6 +63,9 @@ def main():
             rayPosX = startX 
             rayPosY = startY
             while (distance <= 5 and isHit != True):
+                if(rayPosX > 4 or rayPosY > 4):
+                    isHit = False # may be redunant
+                    break
                 if(gameMap[int(rayPosX)][int(rayPosY)] == 1):
                     isHit = True
                 else:
@@ -64,8 +84,8 @@ def main():
 
 
                    
+        pygame.display.update()
         
-        pygame.display.flip()
         
            
             
