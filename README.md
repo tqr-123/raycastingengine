@@ -2,5 +2,5 @@
 A simple raycasting engine
 
 
-https://github.com/user-attachments/assets/f337c178-2df3-4d63-8f1c-e651a02fcf58
 
+![gifOfEngine](https://github.com/user-attachments/assets/5988352a-b3e8-4f1b-a6f9-a18146137e26)
