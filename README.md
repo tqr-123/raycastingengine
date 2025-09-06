@@ -1,5 +1,5 @@
 # raycastingengine
-A simple raycasting engine
+A simple raycasting engine. Created with PyGame, coded in Python.
 
 
 
